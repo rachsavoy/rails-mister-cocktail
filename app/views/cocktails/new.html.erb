@@ -1,9 +1,9 @@
 <div class="container">
   <h2> New Cocktail </h2>
 
-<%= simple_form_for [@cocktail] do |f| %>
+  <%= simple_form_for [@cocktail] do |f| %>
   <%= f.input :name %>
   <%= f.submit "Save cocktail", class: "btn btn-primary" %>
 <% end %>
-
+  <%= link_to "Go back to cocktails", root_path %>
 </div>
