@@ -1,11 +1,30 @@
-<h2 class="text-center"><%= @cocktail.name.upcase %></h2>
+<div class="class text-center" mt-5>
+  <h2 class="text-center" mt-5>
+    <%= @cocktail.name.upcase %>
+  </h2>
+  <div class="pad10">
+    <% if @cocktail.doses.empty? %>
+    <p class="text-gray">
+      No ingredients yet. Add yours!
+    </p>
+    <% else %>
+    <h5 class="text-left"> Ingredients: </h5>
+      <% end %>
+  </div>
 
-<div class="class text-center">
-    <% @cocktail.doses.each do |dose| %>
-    <%= dose.description %>
-  <% end %>
-  <%= link_to "Add an ingredient",  new_cocktail_dose_path(@cocktail) %>
-  <%= link_to "Go back to cocktails", root_path %>
+  <ul class="list-unstyled pad20 text-left">
+    <% @cocktail.doses.each do |d| %>
+    <li>
+      <i class="fa fa-glass"></i> <strong> <%= d.ingredient.name %></strong> - <%= d.description %>
+    </li>
+    <% end %>
+  </ul>
+  <div class="pad20">
+    <%= link_to "Add ingredient", new_cocktail_dose_path(@cocktail), class: "btn btn-primary", id: "ingredient-add-button"%>
+    <%= link_to "Go back", root_path, class: "btn btn-warning" %>
+  </div>
+
+
 </div>
 
 

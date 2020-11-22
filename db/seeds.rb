@@ -5,16 +5,29 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+require 'json'
+require 'open-uri'
+
+
+
 if Rails.env.development?
   Cocktail.destroy_all
   Ingredient.destroy_all
 end
 
+result = JSON.parse(open('http://www.thecocktaildb.com/api/json/v1/1/list.php?i=list').read)
+drinks = result['drinks']
+
+drinks.each do |hash|
+  hash.each do |k, v|
+    Ingredient.create(name: v)
+  end
+end
+
+
 @cocktails = [
   {
     name: "Old Fashioned"
-    #picture: "http://www.seriouseats.com/images/2014/11/20141104-cocktail-party-old-fashioneds-holiday-vicky-wasik-3.jpg"
-    },
   {
     name: "Daiquiri"
     #picture: "http://www.seriouseats.com/images/2015/03/20150323-cocktails-vicky-wasik-daiquiri.jpg"
