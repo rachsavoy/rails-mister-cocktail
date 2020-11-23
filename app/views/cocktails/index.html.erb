@@ -5,11 +5,18 @@
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-<h1><strong> Savoy's Cocktails</strong></h1>
+<h1><strong> <%= current_user %> Cocktails</strong></h1>
+<h5>Create your own cocktails list! Sign up now!</h5>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
+        <% if user_signed_in? %>
         <a><%= link_to 'Add a cocktail', new_cocktail_path(@cocktail) %></a>
+        <a><%= link_to 'Edit my information', edit_user_registration_path %></a>
+        <% else %>
+        <a><%= link_to 'Sign up', new_user_registration_path %></a>
+        <a><%= link_to 'Log in', user_session_path %></a>
+        <% end %>
       </li>
     </ul>
   </div>
